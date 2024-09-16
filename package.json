@@ -1,0 +1,21 @@
+{
+  "name": "project-webdevfun",
+  "version": "1.0.0",
+  "description": "My project within the course TGWK12-Web Development Fundamentals, Jönköping University, 2024.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Node",
+    "Express",
+    "Handlebars",
+    "SQLite3."
+  ],
+  "author": "Rakella Spasovska",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "sqlite3": "^5.1.7"
+  }
+}
