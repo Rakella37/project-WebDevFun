@@ -1,4 +1,5 @@
 const express = require("express"); //load the express package into
+
 const port = 8080; //define the port
 const app = express(); //create the web application
 app.use(express.static('public')) //the public directory is static
