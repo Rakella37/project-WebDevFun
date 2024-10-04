@@ -15,8 +15,12 @@
   "author": "Rakella Spasovska",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.3",
+    "connect-sqlite3": "^0.9.15",
     "express": "^4.19.2",
     "express-handlebars": "^8.0.1",
+    "express-session": "^1.18.0",
     "sqlite3": "^5.1.7"
   }
 }

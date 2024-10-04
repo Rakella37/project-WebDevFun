@@ -1,0 +1,15 @@
+<div id="login">
+<div>
+  <form action="/login" method="post">
+  <label for="username">Username:</label> <input type="text" id="username" name="username" placeholder="username">
+    <label for="password">Password:</label> <input type="password" id="password" name="password" placeholder="password">
+    <input type="submit" value="Login">
+  </form>
+  {{#if error}}
+  <div class="error"> {{error}}</div>
+  {{/if}}
+  {{#if message}}
+  <div class="error"> {{message}}</div>
+  {{/if}}
+</div>
+</div>

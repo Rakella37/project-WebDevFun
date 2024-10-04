@@ -1,0 +1,18 @@
+<div class="principal">
+    <h1>Projects</h1>
+    <ul class="project-container">
+        {{#each projects}}
+            <li class="project">
+                <h2>{{this.ptitle}}</h2> <!-- Use this.ptitle to access the title -->
+                <p>{{this.pdate}}</p> <!-- Use this.date to access the date -->
+                {{#if this.pimage}}
+                <a href="/projects/{{this.pid}}">
+                    <img src="{{this.pimage}}" alt="{{this.ptitle}}">
+                </a>
+                {{/if}}  
+            </li>
+        {{/each}}
+    </ul>
+</div>
+
+
