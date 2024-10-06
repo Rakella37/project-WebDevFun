@@ -67,7 +67,7 @@ next();
 //--------
 //MIDDLEWARES
 //--------
-app.use(express.static ('public')); //the public directory is static
+app.use(express.static ('public')) //the public directory is static
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
      
@@ -118,7 +118,7 @@ app.get('/contact', function (req, res) {
 
 //LOGIN PAGE
 app.get('/login',  (req, res) => {
-    res.render('login.handlebars');
+    res.render('login.handlebars')
 });
 
 app.get('/logout',(req, res) => {
@@ -134,17 +134,40 @@ app.get('/logout',(req, res) => {
 
 //FORM POST LOGIN
 app.post('/login', (req, res) => {
+ //Alternatve 1
+    //const {username, password }  = req.body;
+     //Alternatve 
     const username = req.body.username;
     const password = req.body.password;
-  //verify steps
+  //verification steps
   if(!username  || !password){
+    //build a model
     model = { error: "Username and password are required.", message: ""}
   //send a response
   return res.status(400).render('login.handlebars', model)
   }
   if(username == adminName){
     console.log('The username is the admin one!')
-
+    if (password == adminPassword){
+        console.log('The password is the admin one!')
+        //build a model
+const model= {error: "", message: "You are the admin. Welcome home!"}
+//send a response
+res.render('login.handlebars', model);
+} else {
+    //build a model 
+       const model = { error: "Sorry, the password is not correct..", message: ""} 
+        //send a response
+        res.status(400).render('login.handlebars', model);
+    }
+} else {
+    //build a model
+    const model = { error: `Sorry the username ${username} is not correct...`, message: "" }
+    //send a response
+    res.status(400).render('login.handlebars', model);
+}
+})
+    
     bcrypt.compare(password, adminPassword, (err, result) => {
         if (err) {
             const model = { error: "Error while comapring passwords: " +  err, message: "" }
@@ -166,13 +189,7 @@ app.post('/login', (req, res) => {
         res.status(400).render('login.handlebars', model);
     }
  })
-} else {
-    //build a model
-    const model = { error: `Sorry the username ${username} is not correct...`, message: "" }
-    //send a response
-    res.status(400).render('login.handlebars', model);
-}
-})
+
 
 // SKILLS PAGE
 app.get('/skills', (req, res) => {

@@ -62,16 +62,16 @@
   }
   
   ul {
-    display: flex;
+  
     align-items: center;
-    gap: 1rem;
+    gap: 3rem;
     list-style: none;
     transition: left 0.3s;
   }
   
   ul li a {
     padding: 0.5rem 1rem;
-    border: 2px solid transparent;
+    border: 3px solid transparent;
     text-decoration: none;
     font-weight: 600;
     transition: 0.3s;
@@ -105,24 +105,25 @@ align-content: start;
     font-size: 2.5rem;
     font-weight: 400;
     line-height: 5rem;
-    color: var(--text-dark);
-    margin-bottom: 1rem;
-    position: relative; /* Add positioning context */
-    z-index: 0; /* Set z-index */
-    text-align: center;
-    margin-top: -300px;
+    color: whitesmoke;
+    margin-top: 0;
+  
   }
   
   .title span {
-    font-weight: 200;
+    font-weight: 100;
     position: relative; /* Add positioning context */
     z-index: -2; /* Set z-index */
     margin-top: -300px;
+
   }
 
   h1.title-me{
-    margin-top: -1000px;
+    margin-top:0;
+    margin-left: -50px;
+    margin-bottom: -300px;
   }
+
   .description {
     padding-left: -1000px;
     padding-right: 4%;
@@ -131,7 +132,11 @@ align-content: start;
     margin-bottom: 1rem;
     text-align: left;
     color: whitesmoke;
-    margin-top: 900px;
+    margin-top: 350px;
+    margin-left: -50px;
+    margin-right: 70px;
+    
+
   }
   
   .content-me {
@@ -267,6 +272,7 @@ body {
     background: white;
     color: black;
   }
+
   
   /* Form - Contact Me */
   .card {
@@ -382,6 +388,7 @@ body {
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
     margin: 0 auto;
   }
+
   
   @media (max-width: 1074px) {
     nav {
@@ -704,6 +711,7 @@ body {
     margin-top: 590px;
     margin-left: -200px;
     text-align: center;
+  
 
   }
   
@@ -845,14 +853,21 @@ body {
   }
   
 
-  .home-image{
-    background-image: url(home-image.png);
-    height: 100vh;
-    background-repeat: no-repeat;
-    width: 100%;
-    background-size: cover;
-    background-position: center;
-  }
+  .home-image {
+    position: fixed; /* Ensure the image stays fixed in the viewport */
+    top: 0;
+    left: 0;
+    width: 100%; /* Make the image span the full width of the viewport */
+    height: 100%; /* Make the image span the full height of the viewport */
+    object-fit: cover; /* Ensures the image covers the entire area without distorting */
+    z-index: -3; /* Sends the image behind other elements */
+    transform: scale(1.5); /* Slightly enlarge the image */
+}
+
+.home-title{
+  margin-left: 190px;
+  margin-top: -400px;
+}
 
   /* LOG IN */
 /* Centering the login box */
@@ -914,7 +929,9 @@ body {
     margin-top: 20px;
 }
 
-
+#menulogin {
+  margin-left: -10px; /* Adjust the value to move it more to the left */
+}
 
 #password {
   margin-top: 60px; /* Adjust this value to move the input field down */
@@ -927,6 +944,12 @@ body {
 .principal {
   max-width: 1200px; /* Adjust the max width as needed */
   margin: auto; /* Center the content */
+}
+.proj-name{
+text-align: center;
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+margin-bottom: 80px;
+color: #98FB98;
 }
 
 .project-container {
@@ -966,6 +989,18 @@ ul li.skill-item {
  
 }
 
+.skill-topic {
+  color: #98FB98;
+}
+
+.p-space {
+ display: flex;
+  justify-content: flex-start; /* Aligns elements to the start */
+  gap: 2rem;
+  margin-top: 10px;
+  margin-bottom: 18px;
+}
+
 /* Styles for h1 inside skills section */
 h1.skills-title {
   font-size: 30px;
@@ -981,31 +1016,44 @@ h1.skills-title {
   margin-bottom: 80px;
 }
 
+.skills li {
+  list-style: none;
+  font-size: 20px;
+  padding-bottom: 30px;
+}
+
+.skills {
+line-height: 2.3;
+}
+
+
+
 /* FOOTER */
-footer {
-  background-color: #333; /* Dark background */
-  color: white;
-  text-align: center;
-  padding: 20px 0;
-  width: 100%;
-  position: relative;
+.footer {
+  position: fixed;      
+  bottom: 0;           
+  width: 100%;          
+  color: white;        
+  text-align: center;   
+  padding: 10px 0;      /* Adds padding to the top and bottom */
+  z-index: 10;          /* Ensures it stays on top of other content */
 }
 
 .footer .social-icons {
-  margin: 20px 0;
+  margin: 10px 0;
 }
 
 .footer .social-icons a {
-  margin: 0 10px;
+  margin:  5px;
   color: white;
-  font-size: 24px;
-  text-decoration: none;
+  font-size: 10px;
 }
 
-.footer .social-icons a:hover {
-  color: #a855f7; /* Change color on hover */
+.social-icons a img {
+  margin: 0 10px;
+  width: 20px;  /* Adjust the size of the social media anners */
+  height: 20px;
 }
-
 
 
 /* CONTACT FORM */
