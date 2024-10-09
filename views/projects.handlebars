@@ -3,7 +3,7 @@
     <ul class="project-container">
         {{#each projects}}
             <li class="project">
-                <h2>{{this.ptitle}}</h2> <!-- Use this.ptitle to access the title -->
+                <h2 class="project-title">{{this.ptitle}}</h2> <!-- Use this.ptitle to access the title -->
                 <p>{{this.pdate}}</p> <!-- Use this.date to access the date -->
                 {{#if this.pimage}}
                 <a href="/projects/{{this.pid}}">

@@ -1,27 +1,28 @@
-<!DOCTYPE html>
 <html lang="en">
- <head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/main.css" />
   </head>
-<body>
-   <nav>
+  <body>
+    <nav>
       <ul>
         <li><a href="/">Home</a></li>
-          <li><a href="/projects">Projects</a></li>
-          <li><a href="/aboutme">About Me</a></li>
-          <li><a href="/skills">Skills</a></li>
-           <li><a href="/contact">Contact</a></li>
-           <li id="menulogin"><a href="/login">Login </a></li>
-          {{#if session.isLoggedIn}}
-          <li id="menulogin">Hi, {{session.name}} <a href="/logout">Logout</a></li>
-          {{else}}
-          {{/if}}
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/aboutme">About Me</a></li>
+        <li><a href="/skills">Skills</a></li>
+        <li><a href="/contact">Contact</a></li>
+        {{#if session.isLoggedIn}}
+          <li id="menulogin">
+            <a href="/logout">
+              Hi
+              {{session.name}}, Logout</a>
+          </li>
+        {{else}}
+          <li id="menulogin"><a href="/login">Login</a></li>
+        {{/if}}
       </ul>
     </nav>
     {{{body}}}
-
-    
-</body>
+  </body>
 </html>
