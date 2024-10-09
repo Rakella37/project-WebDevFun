@@ -5,7 +5,7 @@
     font-family: sans-serif;
     box-sizing: border-box;
   }
-  
+
   :root {
     --primary-color: #a855f7;
     --primary-color-dark: #9333ea;
@@ -135,10 +135,17 @@ align-content: start;
     margin-top: 350px;
     margin-left: -50px;
     margin-right: 70px;
-    
-
   }
   
+  .location{
+    display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Aligns items to the top */
+  margin-bottom: -400px; 
+  margin-left: 1000px;
+  align-items: end;
+  border-radius: 25px;
+  }
   .content-me {
     margin-top: -500px;
   }
@@ -565,27 +572,6 @@ body {
     }
   
     /* Form - Contact Me */
-    .card {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      font-family: sans-serif;
-      background: lightgrey;
-      background-color: #4158d0;
-      background-image: linear-gradient(#4158d0 10%, #873681 46%, #77a8d4 100%);
-      border-top-left-radius: 2rem;
-      border-bottom-right-radius: 2rem;
-      padding: 1rem;
-      box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
-        rgba(0, 0, 0, 0.22) 0px 15px 12px;
-      transition: 0.5s ease-in-out;
-      background-size: 110%;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-    }
   
     .heading {
       text-align: center;
@@ -929,9 +915,7 @@ body {
     margin-top: 20px;
 }
 
-#menulogin {
-  margin-left: -10px; /* Adjust the value to move it more to the left */
-}
+
 
 #password {
   margin-top: 60px; /* Adjust this value to move the input field down */
@@ -1105,7 +1089,17 @@ textarea {
 #info h2 {
   font-size: 36px; /* Make the text bigger */
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; /* Change the font family */
-  font-weight: bold; /* Make the text bold (optional) */
-  color: whitesmoke; /* Change the text color (optional) */
-  text-align: center; /* Center the text (optional) */
+  font-weight: bold; 
+  color: whitesmoke; 
+  text-align: center; 
+}
+/* FULL Width Image */
+.full-image{
+  width: 80%;
+  height: 60%;
+
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 15px;
+
 }

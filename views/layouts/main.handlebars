@@ -13,11 +13,11 @@
           <li><a href="/aboutme">About Me</a></li>
           <li><a href="/skills">Skills</a></li>
            <li><a href="/contact">Contact</a></li>
+           <li id="menulogin"><a href="/login">Login </a></li>
           {{#if session.isLoggedIn}}
-          <li id="menulogin">Hi, {{session.name}} <a href="/logout"></a>Logout</li>
+          <li id="menulogin">Hi, {{session.name}} <a href="/logout">Logout</a></li>
           {{else}}
-           <li id="menulogin"><a href="/login"></a>Login</li>
-             {{/if}}
+          {{/if}}
       </ul>
     </nav>
     {{{body}}}

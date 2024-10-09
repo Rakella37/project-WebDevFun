@@ -3,7 +3,7 @@
 //--------
 const adminName='rio'
 //const adminPassword='1234'
-const adminPassword='$2b$12$cg2.ktvbkBrgj7XrBvcAu.BeW8F5SO/3sWaKGPM8apLY8MOTDCBwG'
+const adminPassword='$2b$12$LuVBEPcJyoAzR4PXHDMBj.x6G/vgie6HwfC5xZRx07.tnXRPoeH4.'
 
 //--------
 //PACKAGES
@@ -22,11 +22,11 @@ const saltRounds = 12
 
 //-------
 //bcrypt.hash(adminPassword, saltRounds, function(err, hash){
-   // if(err){
-   //     console.log("---> Error encrypting the password: ", err)
-   // }else{
-   //     console.log("---> Hashed password (GENERATE only ONCE): ", hash)
-   // }
+    //if(err){
+//console.log("---> Error encrypting the password: ", err)
+  //}else{
+     //  console.log("---> Hashed password (GENERATE only ONCE): ", hash)
+   //}
 //})
 
 //--------
@@ -50,8 +50,12 @@ db = new sqlite3.Database(dbFile);
 //--------
 const SQLiteStore = connectSqlite3(session)//store session in teh database
 
-app.use(session({//define the session 
-store:new SQLiteStore ({db:"session-db.d"}),
+app.use(session({ //define the session 
+store: new SQLiteStore({ db: './session-db.d' }),
+
+//ChatGPT i used this block of code  to store session in the database
+//I had problems  with the session, so I used the following code to create a new session
+//store:new SQLiteStore ({ db:"session-db.d"}), //uncmoment this one 
 "saveUninitialized": false,
 "resave":false,
 "secret": "This123Is@Another#456GreatSecret678%Sentence"
@@ -63,6 +67,10 @@ res.locals.session = req.session;
 next();
 });
 
+app.use((req, res, next) => {
+    console.log("Session Object: ", req.session);
+    next();
+});
 
 //--------
 //MIDDLEWARES
@@ -92,6 +100,7 @@ app.get('/', function (req, res) {
  name: req.session.name,
  isAdmin: req.session.isAdmin
 }
+
  console.log("--->Home model: "  + JSON.stringify(model))
  res.render('index.handlebars', model)
 });
@@ -106,10 +115,7 @@ app.get('/', function (req, res) {
     res.render('portfolio.handlebars')
  })
 
-// SKILLS PAGE 
-//app.get('/skills', function (req, res) {
-   //res.render('skills.handlebars')
-//})
+
 
 // CONTACT PAGE
 app.get('/contact', function (req, res) {
@@ -142,54 +148,83 @@ app.post('/login', (req, res) => {
   //verification steps
   if(!username  || !password){
     //build a model
-    model = { error: "Username and password are required.", message: ""}
+    model = { error:' Username and password are required.'}
   //send a response
   return res.status(400).render('login.handlebars', model)
   }
-  if(username == adminName){
+  //check if user is
+  if (username == adminName){
     console.log('The username is the admin one!')
-    if (password == adminPassword){
+    // if (password == adminPassword){
+
+        
+          bcrypt.compare(password, adminPassword, (err, result) => {
+              if (err) {
+                  const model = { error: "Error while comapring passwords: " +  err, message: "" }
+                  res.render('login.handlebars', model);
+              }
+             if(result){
+                      console.log('The password is the admin one!')
+                     //saves the info into the session 
+                     req.session.isAdmin = true
+                       req.session.isLoggedIn =true
+                       req.session.name = username
+                      console.log("Session information: " + JSON.stringify(req.session)) 
+                 //not to login but...
+                   res.redirect("/")
+           //you are the admin, build a model 
+             } else {
+             const model = { error: "Sorry, the password is not correct..", message: ""} 
+            //send a response
+              res.status(400).render('login.handlebars', model);
+          }
+       })
+    
+
         console.log('The password is the admin one!')
-        //build a model
-const model= {error: "", message: "You are the admin. Welcome home!"}
-//send a response
-res.render('login.handlebars', model);
-} else {
     //build a model 
-       const model = { error: "Sorry, the password is not correct..", message: ""} 
-        //send a response
-        res.status(400).render('login.handlebars', model);
-    }
-} else {
+    const model = {error: "", message: "You are the admin. Welcome home!"}
+    //send a response
+    res.render('login.handlebars', model);
+    } else {
     //build a model
     const model = { error: `Sorry the username ${username} is not correct...`, message: "" }
     //send a response
     res.status(400).render('login.handlebars', model);
 }
 })
-    
-    bcrypt.compare(password, adminPassword, (err, result) => {
-        if (err) {
-            const model = { error: "Error while comapring passwords: " +  err, message: "" }
-            res.render('login.handlebars', model);
-        }
-        if(result){
-                console.log('The password is the admin one!')
-                 //saves the info into the session 
-                 req.session.isAdmin = true
-                 req.session.isLoggedIn =true
-                 req.session.name = username
-                console.log("Session information: " + JSON.stringify(req.session)) 
-             //not to login but...
-             res.redirect("/")
-       //you are the admin, build a model 
-       } else {
-       const model = { error: "Sorry, the password is not correct..", message: ""} 
-        //send a response
-        res.status(400).render('login.handlebars', model);
-    }
- })
 
+
+//const model= {error: "", message: "You are the admin. Welcome home!"}
+//send a response
+//res.render('login.handlebars', model);
+//} else {
+    //build a model 
+      // const model = { error: "Sorry, the password is not correct..", message: ""} 
+        //send a response
+       // res.status(400).render('login.handlebars', model);
+   // }
+//} else {
+    //build a model
+   // const model = { error: `Sorry the username ${username} is not correct...`, message: "" }
+    //send a response
+   // res.status(400).render('login.handlebars', model);
+//}
+//})
+    
+  
+
+  //PROJECT PAGE 
+  app.get('/projects', (req, res) => {
+    db.all('SELECT * FROM Projects', (error, projects) => {
+        if (error) {
+            console.error('Error fetching projects:', error);
+            res.status(500).send('Internal Server Error');
+        } else {
+            res.render('projects.handlebars', { projects });
+        }
+    });
+});
 
 // SKILLS PAGE
 app.get('/skills', (req, res) => {
@@ -203,33 +238,13 @@ app.get('/skills', (req, res) => {
     });
 });
 
-  //PROJECT PAGE 
-  app.get('/projects', (req, res) => {
-    db.all('SELECT * FROM Projects', (error, projects) => {
-        if (error) {
-            console.error('Error fetching projects:', error);
-            res.status(500).send('Internal Server Error');
-        } else {
-            res.render('projects.handlebars', { projects });
-        }
-    });
-});
 
-  //PROJECT PAGE 
-  app.get('/projects', (req, res) => {
-    db.all('SELECT * FROM Projects', (error, projects) => {
-        if (error) {
-            console.error('Error fetching projects:', error);
-            res.status(500).send('Internal Server Error');
-        } else {
-            res.render('projects.handlebars', { projects });
-        }
-    });
-});
+
 
 //-------
 // FUNCTION
 //-------
+//dataase
 
 //Table Projects 
 function initTableProjects(db){
@@ -372,17 +387,19 @@ app.listen(port, function () {
 });
 
 // create a new route to send back infor on one specific project
-app.get('/projects/:id', function (req, res) {
-console.log("Project route parameter pid: "+JSON.stringify(req.params.pid))
+app.get('/projects/:pid', function (req, res) {
+console.log("Project route parameter pid: ", req.params.pid)
 // select in the table teh project with the given id
-dbFile.get("SELECT  * FROM projects WHERE pid = ?", [req.params.pid], (error, theProject) => {
+db.get("SELECT * FROM projects WHERE pid = ?", [req.params.pid], (error, theProject) => {
     if (error) {
-        console.log("ERROR:", error); // error display in terminal 
-    } else {
-        const model= {
-            project: theProject
-        }
-    res.render('project.handlebars', model);
+        console.error("Error fetching project:", error); // Log the error
+        return res.status(500).send("Internal Server Error"); // Send a 500 status in case of error
     }
+    if (!theProject) {
+        return res.status(404).send("Project not found"); // Send a 404 if the project doesn't exist
+    }
+
+    // Render the project page with the fetched project data
+    res.render('project.handlebars', { project: theProject });
 })
 })
