@@ -432,7 +432,7 @@ app.listen(port, function () {
 // create a new route to send back infor on one specific project
 app.get("/projects/:pid", function (req, res) {
   console.log("Project route parameter pid: ", req.params.pid);
-  // select in the table teh project with the given id
+  // select in the table the project with the given id
   db.get(
     "SELECT * FROM projects WHERE pid = ?",
     [req.params.pid],
