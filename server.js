@@ -51,7 +51,7 @@ app.use(
 );
 
 app.use(function (req, res, next) {
-  res.locals.session = req.session; // 将 session 放入 locals
+  res.locals.session = req.session; // session locals 
   next();
 });
 
@@ -81,8 +81,8 @@ app.engine(
   })
 );
 
-app.set("view engine", "handlebars"); //set handlebars as the view engine
-app.set("views", "./views"); //define the views directory to be ./views
+app.set("view engine", "handlebars"); 
+app.set("views", "./views"); 
 
 //--------
 //ROUTES

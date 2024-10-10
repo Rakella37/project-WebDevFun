@@ -3,11 +3,18 @@
   <ul>
     {{#each skills}}
       <li class="skill-item">
+        <!-- Displaying the skill title and description -->
         <h3 class="skill-topic">{{this.stitle}}</h3>
         <p class="p-space">{{this.sdescription}}</p>
+
+        <!-- If the user is an admin, show the update and delete forms -->
         {{#if ../session.isAdmin}}
+        <!-- Form to update skill title and description -->
           <form action="/skills/update/{{this.sid}}" method="post" class="skills-form">
+             <!-- Input for the new skill title -->
+            
             <input class="skills-inputs" type="text" name="stitle" placeholder="New Title" required />
+             <!-- Input for the new skill description -->
             <input
             class="skills-inputs"
               type="text"
@@ -15,14 +22,17 @@
               placeholder="New Description"
               required
             />
+              <!-- Submit button for updating the skill -->
             <button class="skill-btn" type="submit">Update</button>
           </form>
 
+        <!-- Form to delete a skill -->
           <form
             action="/skills/delete/{{this.sid}}"
             method="post"
             style="display:inline;"
           >
+          <!-- Submit button for deleting the skill, with a confirmation message pop up  -->
             <button
             class="skill-btn-delete" 
               type="submit"
@@ -34,7 +44,7 @@
     {{/each}}
   </ul>
 
-
+<!-- If the user is an admin, show the form to add new skills -->
   {{#if session.isAdmin}}
     <h2 class="add-skills-title">Add New Skill</h2>
     <form action="/skills/add" method="post">
@@ -46,6 +56,7 @@
         placeholder="Skill Description"
         required
       />
+       <!-- Submit button for adding the new skill -->
       <button class="skills-btn" type="submit">Add Skill</button>
     </form>
   {{/if}}
