@@ -408,7 +408,7 @@ nav ul li a:hover {
   height: 100%; 
   object-fit: cover; 
   z-index: -3; /* Sends the image behind other elements */
-  transform: scale(1.5); /* Slightly enlarges the image */
+  transform: scale(1.6); /* Slightly enlarges the image */
 }
 
 .home-title {

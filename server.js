@@ -39,7 +39,7 @@ db = new sqlite3.Database(dbFile);
 //--------
 //SESSIONS
 //--------
-const SQLiteStore = connectSqlite3(session); //store session in teh database
+const SQLiteStore = connectSqlite3(session); //store session in the database
 
 app.use(
   session({
@@ -416,10 +416,7 @@ app.post("/skills/delete/:sid", checkAdmin, (req, res) => {
   });
 });
 
-// PROJECTS HANDLEBARS
-// app.get('/projects', function (req, res){
-//     res.render('projects.handlebars')
-// })
+
 
 // listen to the port
 app.listen(port, function () {
